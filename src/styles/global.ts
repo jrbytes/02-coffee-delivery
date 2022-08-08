@@ -9,13 +9,13 @@ export const GlobalStyle = createGlobalStyle`
 
   :focus {
     outline: 0;
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.green500};
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.brand.purple};
   }
 
   body {
     ${({ theme }) => `
-      background-color: ${theme.gray900};
-      color: ${theme.gray300};
+      background-color: ${theme.base.background};
+      color: ${theme.base.text};
     `}
     -webkit-font-smoothing: antialiased;
   }
