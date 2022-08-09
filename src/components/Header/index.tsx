@@ -1,10 +1,10 @@
-import { Header as HeaderStyled, Location } from './styles'
+import { HeaderContainer, Location } from './styles'
 import logo from '../../assets/logo.svg'
 import { MapPin, ShoppingCart } from 'phosphor-react'
 
 export function Header() {
   return (
-    <HeaderStyled>
+    <HeaderContainer>
       <img src={logo} alt="Logo do Coffee Delivery" />
 
       <Location>
@@ -16,6 +16,6 @@ export function Header() {
           <ShoppingCart weight="fill" size={20} />
         </button>
       </Location>
-    </HeaderStyled>
+    </HeaderContainer>
   )
 }

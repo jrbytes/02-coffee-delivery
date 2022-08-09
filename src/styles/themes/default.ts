@@ -32,9 +32,10 @@ export const defaultTheme = {
     },
   },
   sizes: {
+    xsmall: '0.6rem',
     small: '0.8rem',
-    medium: '1.2rem',
-    large: '1.6rem',
+    medium: '1rem',
+    large: '1.2rem',
     xlarge: '2.0rem',
     xxlarge: '3.0rem',
   },

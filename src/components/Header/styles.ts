@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 
-export const Header = styled.header`
+export const HeaderContainer = styled.header`
   max-width: 74rem;
   width: 100%;
+  margin: 0 auto;
+  padding: ${({ theme }) => theme.spacings.large} 0;
 
   display: flex;
   align-items: center;
