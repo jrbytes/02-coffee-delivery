@@ -75,12 +75,10 @@ export const Description = styled.p`
 `
 
 export const Footer = styled.div`
-  ${({ theme }) => css`
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  `}
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 
 export const Price = styled.div`
