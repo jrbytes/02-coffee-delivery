@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import background from '../../assets/background.png'
 
 export const Container = styled.div`
@@ -22,25 +22,24 @@ export const Wrapper = styled.div`
 `
 
 export const Content = styled.div`
-  width: 50%;
+  ${({ theme }) => css`
+    width: 50%;
 
-  h4 {
-    ${({ theme }) => `
+    h4 {
       font-family: ${theme.font.title};
       font-weight: ${theme.font.titleWeight.boldTwo};
       color: ${theme.base.title};
       font-size: ${theme.sizes.xxlarge};
-    `}
-    line-height: 1.4;
-  }
+      line-height: 1.4;
+    }
 
-  p {
-    ${({ theme }) => `
+    p {
       margin-top: ${theme.sizes.small};
       font-size: ${theme.sizes.medium};
-      `}
-    line-height: 1.8;
-  }
+
+      line-height: 1.8;
+    }
+  `}
 `
 
 export const Image = styled.img`
@@ -61,7 +60,7 @@ export const ItemBase = styled.div`
   align-items: center;
   width: 45%;
 
-  ${({ theme }) => `
+  ${({ theme }) => css`
     gap: ${theme.spacings.xsmall};
     color: ${theme.base.text};
     font-size: ${theme.sizes.small};
