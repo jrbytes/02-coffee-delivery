@@ -31,11 +31,33 @@ export const Location = styled.div`
   }
 
   button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     background-color: ${(props) => props.theme.brand.yellowLight};
     color: ${({ theme }) => theme.brand.yellowDark};
-    padding: 0.5rem;
+    padding: 0.6rem;
     border-radius: 6px;
     border: 0;
     cursor: pointer;
+
+    position: relative;
   }
+`
+
+export const AmountQuantity = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 99px;
+  position: absolute;
+  top: -0.4rem;
+  right: -0.4rem;
+  background-color: ${(props) => props.theme.brand.yellowDark};
+  color: ${({ theme }) => theme.base.white};
+  font-size: ${({ theme }) => theme.sizes.xsmall};
 `

@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle, css } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -13,7 +13,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    ${({ theme }) => `
+    ${({ theme }) => css`
       background-color: ${theme.base.background};
       color: ${theme.base.text};
     `}
@@ -21,13 +21,15 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body, input, textarea, button {
-    font-family: 'Calibri', sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
+    ${({ theme }) => css`
+      font-family: ${theme.font.text};
+      font-weight: ${theme.font.textWeight.regular};
+      font-size: 1rem;
+    `}
   }
 
   h2 {
-    ${({ theme }) => `
+    ${({ theme }) => css`
       font-family: ${theme.font.title};
       font-size: ${theme.sizes.xlarge};
       font-weight: ${theme.font.titleWeight.boldTwo};
@@ -35,7 +37,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   h3 {
-    ${({ theme }) => `
+    ${({ theme }) => css`
       font-family: ${theme.font.title};
       font-size: ${theme.sizes.large};
       font-weight: ${theme.font.titleWeight.boldTwo};
