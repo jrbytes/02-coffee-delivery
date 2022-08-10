@@ -63,7 +63,7 @@ export const Title = styled.h4`
 
 export const Description = styled.p`
   ${({ theme }) => css`
-    font-size: ${theme.sizes.medium};
+    font-size: ${theme.sizes.small};
     font-family: ${theme.font.text};
     font-weight: ${theme.font.textWeight.regular};
     color: ${theme.base.label};
