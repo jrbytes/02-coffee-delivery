@@ -11,11 +11,13 @@ export const Container = styled.div`
 `
 
 export const Content = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  ${({ theme }) => css`
+    display: flex;
+    flex-wrap: wrap;
 
-  gap: ${({ theme }) => theme.spacings.xlarge};
-  margin-bottom: 8rem;
+    gap: ${theme.spacings.xlarge};
+    margin-bottom: ${theme.grid.gutterBottom};
+  `}
 `
 
 export const Item = styled.div`

@@ -48,4 +48,7 @@ export const defaultTheme = {
     xxlarge: '3.0rem',
   },
   borderRadius: '4px',
+  grid: {
+    gutterBottom: '8rem',
+  },
 }
