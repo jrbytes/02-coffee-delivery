@@ -26,6 +26,7 @@ export const Item = styled.div`
   ${({ theme }) => css`
     img {
       margin-top: -${theme.spacings.xlarge};
+      filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.2));
     }
     width: 16.5rem;
     border-top-right-radius: ${theme.sizes.xlarge};

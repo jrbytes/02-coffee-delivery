@@ -1,4 +1,5 @@
 import { ShoppingCart } from 'phosphor-react'
+import { useNavigate } from 'react-router-dom'
 import {
   Amount,
   ButtonCart,
@@ -32,6 +33,8 @@ export function Card({
   amount,
   tags,
 }: Props) {
+  const navigate = useNavigate()
+
   return (
     <Item>
       <img src={imgUrl} alt={`Copo de café ${title}`} />
@@ -52,7 +55,7 @@ export function Card({
           <span>{amount}</span>
           <button>+</button>
         </Amount>
-        <ButtonCart>
+        <ButtonCart onClick={() => navigate('/checkout')}>
           <ShoppingCart weight="fill" />
         </ButtonCart>
       </Footer>
