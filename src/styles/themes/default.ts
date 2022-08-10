@@ -47,5 +47,5 @@ export const defaultTheme = {
     xlarge: '2.4rem',
     xxlarge: '3.0rem',
   },
-  borderRadius: '8px',
+  borderRadius: '4px',
 }

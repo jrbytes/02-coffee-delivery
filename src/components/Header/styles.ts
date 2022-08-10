@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const HeaderContainer = styled.header`
   max-width: 74rem;
@@ -16,34 +16,36 @@ export const Location = styled.div`
   justify-content: center;
   align-items: center;
 
-  gap: 0.8rem;
+  ${({ theme }) => css`
+    gap: ${theme.spacings.small};
 
-  span {
-    background-color: ${(props) => props.theme.brand.purpleLight};
-    padding: 0.6rem 0.8rem;
-    border-radius: 6px;
+    span {
+      background-color: ${theme.brand.purpleLight};
+      padding: ${theme.spacings.small};
+      border-radius: ${theme.borderRadius};
 
-    display: flex;
-    align-items: center;
-    gap: 0.2rem;
-    color: ${({ theme }) => theme.brand.purpleDark};
-    font-size: 0.8rem;
-  }
+      display: flex;
+      align-items: center;
+      gap: ${theme.spacings.xsmall};
+      color: ${theme.brand.purpleDark};
+      font-size: ${theme.sizes.small};
+    }
 
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-    background-color: ${(props) => props.theme.brand.yellowLight};
-    color: ${({ theme }) => theme.brand.yellowDark};
-    padding: 0.6rem;
-    border-radius: 6px;
-    border: 0;
-    cursor: pointer;
+      background-color: ${theme.brand.yellowLight};
+      color: ${theme.brand.yellowDark};
+      padding: ${theme.spacings.small};
+      border-radius: ${theme.borderRadius};
+      border: 0;
+      cursor: pointer;
 
-    position: relative;
-  }
+      position: relative;
+    }
+  `}
 `
 
 export const AmountQuantity = styled.div`
@@ -57,7 +59,10 @@ export const AmountQuantity = styled.div`
   position: absolute;
   top: -0.4rem;
   right: -0.4rem;
-  background-color: ${(props) => props.theme.brand.yellowDark};
-  color: ${({ theme }) => theme.base.white};
-  font-size: ${({ theme }) => theme.sizes.xsmall};
+
+  ${({ theme }) => css`
+    background-color: ${theme.brand.yellowDark};
+    color: ${theme.base.white};
+    font-size: ${theme.sizes.xsmall};
+  `}
 `
