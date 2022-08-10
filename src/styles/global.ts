@@ -33,6 +33,7 @@ export const GlobalStyle = createGlobalStyle`
       font-family: ${theme.font.title};
       font-size: ${theme.sizes.xlarge};
       font-weight: ${theme.font.titleWeight.boldTwo};
+      color: ${theme.base.subtitle};
     `}
   }
 
@@ -41,6 +42,7 @@ export const GlobalStyle = createGlobalStyle`
       font-family: ${theme.font.title};
       font-size: ${theme.sizes.large};
       font-weight: ${theme.font.titleWeight.boldTwo};
+      color: ${theme.base.subtitle};
     `}
   }
 `
