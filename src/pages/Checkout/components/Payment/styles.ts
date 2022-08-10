@@ -17,7 +17,7 @@ export const Header = styled.div`
 
     svg {
       margin-right: ${theme.spacings.small};
-      color: ${theme.brand.purpleDark};
+      color: ${theme.brand.purple};
     }
 
     div {
@@ -33,8 +33,12 @@ export const Header = styled.div`
   `}
 `
 
-export const Methods = styled.div`
-  ${({ theme }) => css`
+type PaymentMethodProps = {
+  method?: 'debit-card' | 'credit-card' | 'cash'
+}
+
+export const Methods = styled.div<PaymentMethodProps>`
+  ${({ theme, method }) => css`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: ${theme.spacings.small};
@@ -45,17 +49,24 @@ export const Methods = styled.div`
 
       gap: 0.4rem;
       background-color: ${theme.base.button};
+      border: 1px solid ${theme.base.button};
       padding: ${theme.spacings.small} ${theme.spacings.small};
-      border: 0;
       border-radius: ${theme.borderRadius};
       text-transform: uppercase;
       font-size: ${theme.sizes.small};
       color: ${theme.base.text};
       cursor: pointer;
 
+      box-shadow: none;
+
       svg {
-        color: ${theme.brand.purpleDark};
+        color: ${theme.brand.purple};
       }
+    }
+
+    button[name='${method}'] {
+      background-color: ${theme.brand.purpleLight};
+      border: 1px solid ${theme.brand.purple};
     }
   `}
 `
