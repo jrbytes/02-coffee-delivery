@@ -16,7 +16,7 @@ export function CoffeeList() {
             description={item.description}
             price={item.price}
             amount={item.amount}
-            tags={[item.tags]}
+            tags={item.tags}
           />
         ))}
       </Content>
