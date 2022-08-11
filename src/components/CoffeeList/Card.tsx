@@ -21,7 +21,7 @@ interface Props {
   title: string
   description: string
   price: string
-  amount: number
+  available: number
   tags: TagProps[]
 }
 
@@ -30,10 +30,12 @@ export function Card({
   title,
   description,
   price,
-  amount,
+  available,
   tags,
 }: Props) {
   const navigate = useNavigate()
+
+  // adicionar available em amount, nao permitir mais que available
 
   return (
     <Item>
@@ -52,7 +54,7 @@ export function Card({
         </Price>
         <Amount>
           <button>-</button>
-          <span>{amount}</span>
+          <span>0</span>
           <button>+</button>
         </Amount>
         <ButtonCart onClick={() => navigate('/checkout')}>
