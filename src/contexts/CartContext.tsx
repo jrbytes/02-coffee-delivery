@@ -23,7 +23,7 @@ interface CartContextType {
   cart: CartProps | undefined
   // checkout: CheckoutProps
   addProduct: (product: ProductProps) => void
-  // removeProduct: (product: ProductProps) => void
+  removeProduct: (product: ProductProps) => void
   // clearCart: () => void
   // addCheckout: (checkout: CheckoutProps) => void
 }
@@ -45,6 +45,79 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   useEffect(() => {
     setProducts(coffee)
   }, [])
+
+  const removeProduct = useCallback(
+    (product: ProductProps) => {
+      const existsInTheCart = cart.items.find(
+        (item) => item.productId === product.id,
+      )
+
+      if (!existsInTheCart) {
+        return
+      }
+
+      if (existsInTheCart && existsInTheCart.amount > 1) {
+        const decrement = cart.items.map((item) => {
+          let updatedCart = { ...item }
+          if (item.productId === product.id && item.amount > 1) {
+            updatedCart = {
+              ...item,
+              amount: item.amount - 1,
+              total: String(parseFloat(item.total) - parseFloat(product.price)),
+            }
+          }
+          return updatedCart
+        })
+
+        setCart({
+          items: decrement,
+          totalCart: String(
+            parseFloat(cart.totalCart) - parseFloat(product.price),
+          ),
+        })
+
+        setProducts(
+          products.map((item) => {
+            let updatedItem = item
+            if (item.id === product.id) {
+              updatedItem = {
+                ...item,
+                available: item.available + 1,
+              }
+            }
+            return updatedItem
+          }),
+        )
+      }
+
+      if (existsInTheCart && existsInTheCart.amount === 1) {
+        const remove = cart.items.filter(
+          (item) => item.productId !== product.id,
+        )
+
+        setCart({
+          items: remove,
+          totalCart: String(
+            parseFloat(cart.totalCart) - parseFloat(product.price),
+          ),
+        })
+
+        setProducts(
+          products.map((item) => {
+            let updatedItem = item
+            if (item.id === product.id) {
+              updatedItem = {
+                ...item,
+                available: item.available + 1,
+              }
+            }
+            return updatedItem
+          }),
+        )
+      }
+    },
+    [cart.items, cart.totalCart, products],
+  )
 
   const addProduct = useCallback(
     (product: ProductProps) => {
@@ -116,7 +189,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   )
 
   return (
-    <CartContext.Provider value={{ products, cart, addProduct }}>
+    <CartContext.Provider value={{ products, cart, addProduct, removeProduct }}>
       {children}
     </CartContext.Provider>
   )

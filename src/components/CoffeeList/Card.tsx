@@ -15,11 +15,14 @@ import {
 
 export function Card(props: ProductProps) {
   const navigate = useNavigate()
-  const { cart, addProduct } = useContext(CartContext)
+  const { cart, addProduct, removeProduct } = useContext(CartContext)
 
   const handleAddProduct = (data: ProductProps) => {
-    console.log('1')
     addProduct(data)
+  }
+
+  const handleRemoveProduct = (data: ProductProps) => {
+    removeProduct(data)
   }
 
   const amount = useCallback(
@@ -49,7 +52,7 @@ export function Card(props: ProductProps) {
           <span>{props.price}</span>
         </Price>
         <Amount>
-          <button>-</button>
+          <button onClick={() => handleRemoveProduct(props)}>-</button>
           <span>{amount(props.id)}</span>
           <button onClick={() => handleAddProduct(props)}>+</button>
         </Amount>
