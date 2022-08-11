@@ -14,6 +14,7 @@ export function CoffeeList() {
         {products?.map((item) => (
           <Card
             key={item.id}
+            id={item.id}
             imgUrl={item.imgUrl}
             title={item.title}
             description={item.description}

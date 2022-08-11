@@ -1,5 +1,7 @@
 import { ShoppingCart } from 'phosphor-react'
+import { useCallback, useContext, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { CartContext, ProductProps } from '../../contexts/CartContext'
 import {
   Amount,
   ButtonCart,
@@ -11,51 +13,45 @@ import {
   Title,
 } from './styles'
 
-type TagProps = {
-  id: number
-  name: string
-}
-
-interface Props {
-  imgUrl: string
-  title: string
-  description: string
-  price: string
-  available: number
-  tags: TagProps[]
-}
-
-export function Card({
-  imgUrl,
-  title,
-  description,
-  price,
-  available,
-  tags,
-}: Props) {
+export function Card(props: ProductProps) {
   const navigate = useNavigate()
+  const { cart, addProduct } = useContext(CartContext)
 
-  // adicionar available em amount, nao permitir mais que available
+  const handleAddProduct = (data: ProductProps) => {
+    console.log('1')
+    addProduct(data)
+  }
+
+  const amount = useCallback(
+    (id: number) => {
+      if (cart) {
+        const item = cart.items.find((item) => item.productId === id)
+        return item ? item.amount : 0
+      }
+      return 0
+    },
+    [cart],
+  )
 
   return (
     <Item>
-      <img src={imgUrl} alt={`Copo de café ${title}`} />
+      <img src={props.imgUrl} alt={`Copo de café ${props.title}`} />
       <Tags>
-        {tags.map((tag) => (
+        {props.tags.map((tag) => (
           <span key={tag.id}>{tag.name}</span>
         ))}
       </Tags>
-      <Title>{title}</Title>
-      <Description>{description}</Description>
+      <Title>{props.title}</Title>
+      <Description>{props.description}</Description>
       <Footer>
         <Price>
           <span>R$</span>
-          <span>{price}</span>
+          <span>{props.price}</span>
         </Price>
         <Amount>
           <button>-</button>
-          <span>0</span>
-          <button>+</button>
+          <span>{amount(props.id)}</span>
+          <button onClick={() => handleAddProduct(props)}>+</button>
         </Amount>
         <ButtonCart onClick={() => navigate('/checkout')}>
           <ShoppingCart weight="fill" />
