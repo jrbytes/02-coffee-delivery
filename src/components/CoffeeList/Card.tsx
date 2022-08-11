@@ -36,6 +36,13 @@ export function Card(props: ProductProps) {
     [cart],
   )
 
+  const formatPrice = Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  })
+    .format(parseFloat(props.price))
+    .replace('R$', '')
+
   return (
     <Item>
       <img src={props.imgUrl} alt={`Copo de café ${props.title}`} />
@@ -49,7 +56,7 @@ export function Card(props: ProductProps) {
       <Footer>
         <Price>
           <span>R$</span>
-          <span>{props.price}</span>
+          <span>{formatPrice}</span>
         </Price>
         <Amount>
           <button onClick={() => handleRemoveProduct(props)}>-</button>

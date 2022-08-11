@@ -88,7 +88,6 @@ export const Price = styled.div`
     span {
       :first-child {
         font-family: ${theme.font.text};
-        margin-right: ${theme.spacings.xsmall};
         font-size: 1rem;
       }
 
@@ -106,7 +105,7 @@ export const Amount = styled.div`
     display: flex;
     align-items: center;
     background-color: ${theme.base.button};
-    border-radius: 8px;
+    border-radius: ${theme.borderRadius};
 
     button {
       width: 2rem;
@@ -117,13 +116,13 @@ export const Amount = styled.div`
       cursor: pointer;
 
       :first-child {
-        border-top-left-radius: 8px;
-        border-bottom-left-radius: 8px;
+        border-top-left-radius: ${theme.borderRadius};
+        border-bottom-left-radius: ${theme.borderRadius};
       }
 
       :last-child {
-        border-top-right-radius: 8px;
-        border-bottom-right-radius: 8px;
+        border-top-right-radius: ${theme.borderRadius};
+        border-bottom-right-radius: ${theme.borderRadius};
       }
     }
 
@@ -145,7 +144,7 @@ export const ButtonCart = styled.button`
     border: 0;
     color: ${theme.base.white};
     background-color: ${theme.brand.purpleDark};
-    border-radius: 8px;
+    border-radius: ${theme.borderRadius};
     cursor: pointer;
   `}
 `
