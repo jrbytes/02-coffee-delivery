@@ -8,7 +8,8 @@ import { useContext } from 'react'
 
 export function Header() {
   const navigate = useNavigate()
-  const { cart } = useContext(CartContext)
+  const { cartState } = useContext(CartContext)
+  const cart = cartState.cart
 
   const amountProductTotal = !cart ? '0' : cart.items.length
 
