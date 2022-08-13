@@ -1,7 +1,7 @@
 export const defaultTheme = {
   base: {
     white: '#FFFFFF',
-    background: '#FAFAFA',
+    background: '#8d8686', // #fafafa
     card: '#F3F2F2',
     input: '#EDEDED',
     button: '#E6E5E5',

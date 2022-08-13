@@ -1,6 +1,8 @@
 import {
   createContext,
+  Dispatch,
   ReactNode,
+  SetStateAction,
   useCallback,
   useEffect,
   useState,
@@ -8,6 +10,25 @@ import {
 import { coffee } from './data'
 
 export type ProductProps = typeof coffee[0]
+
+type AddressFormData = {
+  postalCode: string
+  address: string
+  addressNumber: string
+  addressComplement: string
+  neighborhood: string
+  city: string
+  state: string
+}
+
+interface PaymentProps {
+  method?: 'debit-card' | 'credit-card' | 'cash'
+}
+
+type CheckoutProps = {
+  address: AddressFormData
+  paymentType: PaymentProps['method']
+}
 
 type CartProps = {
   items: {
@@ -21,11 +42,11 @@ type CartProps = {
 interface CartContextType {
   products: ProductProps[]
   cart: CartProps | undefined
-  // checkout: CheckoutProps
+  checkout: CheckoutProps
+  setCheckout: Dispatch<SetStateAction<CheckoutProps>>
   addProduct: (product: ProductProps) => void
   removeProduct: (product: ProductProps) => void
   // clearCart: () => void
-  // addCheckout: (checkout: CheckoutProps) => void
 }
 
 export const CartContext = createContext<CartContextType>({} as CartContextType)
@@ -40,7 +61,10 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     items: [],
     totalCart: '0',
   } as CartProps)
-  console.log('products', products)
+  const [checkout, setCheckout] = useState<CheckoutProps>({
+    address: {} as AddressFormData,
+    paymentType: undefined,
+  })
 
   useEffect(() => {
     setProducts(coffee)
@@ -189,7 +213,16 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   )
 
   return (
-    <CartContext.Provider value={{ products, cart, addProduct, removeProduct }}>
+    <CartContext.Provider
+      value={{
+        products,
+        cart,
+        addProduct,
+        removeProduct,
+        checkout,
+        setCheckout,
+      }}
+    >
       {children}
     </CartContext.Provider>
   )
