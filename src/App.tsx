@@ -10,8 +10,8 @@ export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CartContextProvider>
-        <Header />
         <BrowserRouter>
+          <Header />
           <Router />
         </BrowserRouter>
       </CartContextProvider>
