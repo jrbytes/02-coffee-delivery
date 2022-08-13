@@ -26,17 +26,14 @@ type PaymentProps = {
 }
 
 export function Address() {
-  const { checkout, setCheckout } = useContext(CartContext)
+  const { setCheckout } = useContext(CartContext)
   const [selectedMethod, setSelectedMethod] = useState<PaymentProps['method']>()
 
-  const { register, handleSubmit, formState } = useForm<AddressFormData>({
-    mode: 'onBlur',
+  const { register, watch, formState } = useForm<AddressFormData>({
+    mode: 'onChange',
   })
-  const { errors } = formState
-
-  const onSubmit = useCallback((data: AddressFormData) => {
-    console.log(data)
-  }, [])
+  const { errors, isValid } = formState
+  const formData = watch()
 
   const border = (error: boolean) => {
     return error
@@ -48,6 +45,21 @@ export function Address() {
     return error ? '0px 0px 0px 2px tomato' : 'none'
   }
 
+  const handleAddCheckout = useCallback(
+    (type: PaymentProps['method']) => {
+      const errorsEmpty = Object.keys(errors).length === 0
+
+      if (errorsEmpty) {
+        setSelectedMethod(type)
+        setCheckout({
+          address: { ...formData },
+          paymentType: type,
+        })
+      }
+    },
+    [errors, setCheckout, formData],
+  )
+
   return (
     <>
       <S.Address>
@@ -58,7 +70,7 @@ export function Address() {
             <p>Informe o endereço onde deseja receber seu pedido</p>
           </div>
         </S.HeaderAddress>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form>
           <S.InputCep
             type="text"
             placeholder="CEP"
@@ -141,34 +153,36 @@ export function Address() {
           />
         </form>
       </S.Address>
-      <S.Payment>
-        <S.HeaderPayment>
-          <CurrencyDollar size={22} />
-          <div>
-            <p>Pagamento</p>
-            <p>
-              O pagamento é feito na entrega. Escolha a forma que deseja pagar
-            </p>
-          </div>
-        </S.HeaderPayment>
-        <S.Methods method={selectedMethod}>
-          <button
-            name="credit-card"
-            onClick={() => setSelectedMethod('credit-card')}
-          >
-            <CreditCard size={16} /> Cartão de crédito
-          </button>
-          <button
-            name="debit-card"
-            onClick={() => setSelectedMethod('debit-card')}
-          >
-            <Bank size={16} /> Cartão de débito
-          </button>
-          <button name="cash" onClick={() => setSelectedMethod('cash')}>
-            <Money size={16} /> Dinheiro
-          </button>
-        </S.Methods>
-      </S.Payment>
+      {isValid && (
+        <S.Payment>
+          <S.HeaderPayment>
+            <CurrencyDollar size={22} />
+            <div>
+              <p>Pagamento</p>
+              <p>
+                O pagamento é feito na entrega. Escolha a forma que deseja pagar
+              </p>
+            </div>
+          </S.HeaderPayment>
+          <S.Methods method={selectedMethod}>
+            <button
+              name="credit-card"
+              onClick={() => handleAddCheckout('credit-card')}
+            >
+              <CreditCard size={16} /> Cartão de crédito
+            </button>
+            <button
+              name="debit-card"
+              onClick={() => handleAddCheckout('debit-card')}
+            >
+              <Bank size={16} /> Cartão de débito
+            </button>
+            <button name="cash" onClick={() => handleAddCheckout('cash')}>
+              <Money size={16} /> Dinheiro
+            </button>
+          </S.Methods>
+        </S.Payment>
+      )}
     </>
   )
 }
