@@ -164,9 +164,17 @@ export const EmptyCart = styled.div`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    gap: ${theme.spacings.small};
     padding: ${theme.spacings.xxlarge};
     color: ${theme.base.text};
     font-size: ${theme.sizes.medium};
+
+    a {
+      color: ${theme.brand.purple};
+      text-decoration: none;
+      font-size: ${theme.sizes.small};
+      text-transform: uppercase;
+    }
   `}
 `

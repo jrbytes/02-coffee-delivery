@@ -66,7 +66,6 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     address: {} as AddressFormData,
     paymentType: undefined,
   })
-  console.log(checkout)
 
   useEffect(() => {
     setProducts(coffee)

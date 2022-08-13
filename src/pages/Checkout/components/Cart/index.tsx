@@ -1,7 +1,7 @@
 import { useContext, useMemo } from 'react'
-import { Trash } from 'phosphor-react'
 import * as S from './styles'
 import { CartContext, ProductProps } from '../../../../contexts/CartContext'
+import { Link } from 'react-router-dom'
 
 type ProductMemoizedProps = {
   product: ProductProps
@@ -76,10 +76,10 @@ export function Cart() {
                         +
                       </S.MoreButton>
                     </div>
-                    <S.RemoveButton>
+                    {/* <S.RemoveButton>
                       <Trash size={16} />
                       remover
-                    </S.RemoveButton>
+                    </S.RemoveButton> */}
                   </S.ItemButtons>
                 </div>
               </S.ItemInfo>
@@ -116,6 +116,7 @@ export function Cart() {
       ) : (
         <S.EmptyCart>
           <p>Seu carrinho está vazio</p>
+          <Link to="/">Voltar à página inicial</Link>
         </S.EmptyCart>
       )}
     </S.Cart>
