@@ -5,7 +5,9 @@ export const Cart = styled.div`
     background-color: ${theme.base.card};
     padding: ${theme.spacings.xlarge};
     border-top-right-radius: ${theme.sizes.xlarge};
+    border-top-left-radius: ${theme.borderRadius};
     border-bottom-left-radius: ${theme.sizes.xlarge};
+    border-bottom-right-radius: ${theme.borderRadius};
   `}
 `
 
@@ -155,5 +157,16 @@ export const AccountStatement = styled.div`
       font-weight: ${theme.font.textWeight.bold};
       cursor: pointer;
     }
+  `}
+`
+
+export const EmptyCart = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: ${theme.spacings.xxlarge};
+    color: ${theme.base.text};
+    font-size: ${theme.sizes.medium};
   `}
 `

@@ -34,6 +34,7 @@ type CartProps = {
   items: {
     productId: number
     amount: number
+
     total: string
   }[]
   totalCart: string
