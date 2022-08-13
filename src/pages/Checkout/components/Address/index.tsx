@@ -5,7 +5,7 @@ import {
   MapPinLine,
   Money,
 } from 'phosphor-react'
-import { useCallback, useContext, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { CartContext } from '../../../../contexts/CartContext'
 import * as S from './styles'
@@ -26,14 +26,27 @@ type PaymentProps = {
 }
 
 export function Address() {
-  const { setCheckout } = useContext(CartContext)
+  const { checkout, setCheckout } = useContext(CartContext)
   const [selectedMethod, setSelectedMethod] = useState<PaymentProps['method']>()
 
-  const { register, watch, formState } = useForm<AddressFormData>({
+  const { register, watch, formState, setValue } = useForm<AddressFormData>({
     mode: 'onChange',
   })
   const { errors, isValid } = formState
   const formData = watch()
+
+  useEffect(() => {
+    if (checkout.address) {
+      setValue('postalCode', checkout.address.postalCode)
+      setValue('address', checkout.address.address)
+      setValue('addressNumber', checkout.address.addressNumber)
+      setValue('addressComplement', checkout.address.addressComplement)
+      setValue('neighborhood', checkout.address.neighborhood)
+      setValue('city', checkout.address.city)
+      setValue('state', checkout.address.state)
+      setSelectedMethod(checkout.paymentType)
+    }
+  }, [setValue, checkout, selectedMethod])
 
   const border = (error: boolean) => {
     return error
@@ -153,7 +166,7 @@ export function Address() {
           />
         </form>
       </S.Address>
-      {isValid && (
+      {(isValid || checkout.paymentType) && (
         <S.Payment>
           <S.HeaderPayment>
             <CurrencyDollar size={22} />
