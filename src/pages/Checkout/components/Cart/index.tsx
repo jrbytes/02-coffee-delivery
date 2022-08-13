@@ -10,7 +10,7 @@ type ProductMemoizedProps = {
 }
 
 export function Cart() {
-  const { cart, products } = useContext(CartContext)
+  const { cart, products, addProduct, removeProduct } = useContext(CartContext)
 
   const memoizedItems = useMemo(() => {
     return cart?.items.map((item) => ({
@@ -19,6 +19,20 @@ export function Cart() {
       total: item.total,
     }))
   }, [cart?.items, products]) as ProductMemoizedProps[]
+
+  const handleAddProduct = (id: string) => {
+    const product = products.find((product) => product.id === parseInt(id))
+    if (product) {
+      addProduct(product)
+    }
+  }
+
+  const handleRemoveProduct = (id: string) => {
+    const product = products.find((product) => product.id === parseInt(id))
+    if (product) {
+      removeProduct(product)
+    }
+  }
 
   const totalItems =
     cart &&
@@ -46,9 +60,21 @@ export function Cart() {
                   <p>{item.product.title}</p>
                   <S.ItemButtons>
                     <div>
-                      <S.MinusButton>-</S.MinusButton>
+                      <S.MinusButton
+                        onClick={() =>
+                          handleRemoveProduct(String(item.product.id))
+                        }
+                      >
+                        -
+                      </S.MinusButton>
                       <span>{item.amount}</span>
-                      <S.MoreButton>+</S.MoreButton>
+                      <S.MoreButton
+                        onClick={() =>
+                          handleAddProduct(String(item.product.id))
+                        }
+                      >
+                        +
+                      </S.MoreButton>
                     </div>
                     <S.RemoveButton>
                       <Trash size={16} />
