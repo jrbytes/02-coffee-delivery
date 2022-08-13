@@ -10,7 +10,8 @@ type ProductMemoizedProps = {
 }
 
 export function Cart() {
-  const { cart, products, addProduct, removeProduct } = useContext(CartContext)
+  const { cartState, addProduct, removeProduct } = useContext(CartContext)
+  const { products, cart } = cartState
 
   const memoizedItems = useMemo(() => {
     return cart?.items.map((item) => ({

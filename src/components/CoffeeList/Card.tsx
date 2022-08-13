@@ -15,7 +15,8 @@ import {
 
 export function Card(props: ProductProps) {
   const navigate = useNavigate()
-  const { cart, addProduct, removeProduct } = useContext(CartContext)
+  const { cartState, addProduct, removeProduct } = useContext(CartContext)
+  const cart = cartState.cart
 
   const handleAddProduct = (data: ProductProps) => {
     addProduct(data)

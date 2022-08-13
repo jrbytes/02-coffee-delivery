@@ -4,8 +4,8 @@ import { CartContext } from '../../contexts/CartContext'
 import { useContext } from 'react'
 
 export function Home() {
-  const { cart } = useContext(CartContext)
-  console.log('carrinho', cart)
+  const { cartState } = useContext(CartContext)
+  console.log('carrinho', cartState)
   return (
     <>
       <Intro />

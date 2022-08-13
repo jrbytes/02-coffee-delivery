@@ -4,7 +4,8 @@ import { Card } from './Card'
 import { CartContext } from '../../contexts/CartContext'
 
 export function CoffeeList() {
-  const { products } = useContext(CartContext)
+  const { cartState } = useContext(CartContext)
+  const products = cartState.products
 
   return (
     <Container>
