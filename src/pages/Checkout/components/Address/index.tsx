@@ -26,7 +26,7 @@ type PaymentProps = {
 }
 
 export function Address() {
-  const { cartState, setCartState } = useContext(CartContext)
+  const { cartState } = useContext(CartContext)
   const checkout = cartState.checkout
 
   const [selectedMethod, setSelectedMethod] = useState<PaymentProps['method']>()
@@ -66,16 +66,16 @@ export function Address() {
 
       if (errorsEmpty) {
         setSelectedMethod(type)
-        setCartState({
-          ...cartState,
-          checkout: {
-            address: { ...formData },
-            paymentType: type,
-          },
-        })
+        // setCartState({
+        //   ...cartState,
+        //   checkout: {
+        //     address: { ...formData },
+        //     paymentType: type,
+        //   },
+        // })
       }
     },
-    [errors, setCartState, cartState, formData],
+    [errors],
   )
 
   return (
