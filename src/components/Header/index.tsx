@@ -27,7 +27,7 @@ export function Header() {
           <MapPin weight="fill" size={20} />
           Porto Alegre, RS
         </span>
-        <button>
+        <button onClick={() => navigate('/checkout')}>
           <ShoppingCart weight="fill" size={20} />
           <AmountQuantity>{amountProductTotal}</AmountQuantity>
         </button>
