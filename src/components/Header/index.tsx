@@ -11,7 +11,7 @@ export function Header() {
   const { cartState } = useContext(CartContext)
   const cart = cartState.cart
 
-  const amountProductTotal = !cart ? '0' : cart.items.length
+  const amountProductTotal = cart.items ? cart.items.length : 0
 
   return (
     <HeaderContainer>
@@ -29,6 +29,7 @@ export function Header() {
         </span>
         <button onClick={() => navigate('/checkout')}>
           <ShoppingCart weight="fill" size={20} />
+
           <AmountQuantity>{amountProductTotal}</AmountQuantity>
         </button>
       </Location>
