@@ -48,6 +48,8 @@ export function cartReducer(state: CartStateProps, action: any) {
     }
 
     case ActionTypes.ADD_ADDRESS_AND_PAYMENT_TYPE: {
+      if (state.orderReceivedSuccessfully) return { ...state }
+
       const { address, paymentType } = action.payload.checkout
       return {
         ...state,
@@ -64,6 +66,8 @@ export function cartReducer(state: CartStateProps, action: any) {
       }
     }
     case ActionTypes.ADD_PRODUCT_TO_CART: {
+      if (state.orderReceivedSuccessfully) return { ...state }
+
       const { product } = action.payload
 
       const isAvailable = product.available <= 0
@@ -135,6 +139,8 @@ export function cartReducer(state: CartStateProps, action: any) {
       }
     }
     case ActionTypes.REMOVE_PRODUCT_FROM_CART: {
+      if (state.orderReceivedSuccessfully) return { ...state }
+
       const { product } = action.payload
 
       const existsInTheCart = state.cart.items.find(

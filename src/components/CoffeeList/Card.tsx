@@ -20,17 +20,13 @@ export function Card(props: ProductProps) {
   const { cart, orderReceivedSuccessfully } = cartState
 
   const handleAddProduct = (data: ProductProps) => {
-    if (orderReceivedSuccessfully) {
-      return
-    }
+    if (orderReceivedSuccessfully) return
 
     addProduct(data)
   }
 
   const handleRemoveProduct = (data: ProductProps) => {
-    if (orderReceivedSuccessfully) {
-      return
-    }
+    if (orderReceivedSuccessfully) return
 
     removeProduct(data)
   }
