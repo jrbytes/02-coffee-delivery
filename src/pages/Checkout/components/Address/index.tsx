@@ -27,6 +27,7 @@ type PaymentProps = {
 
 export function Address() {
   const { cartState, handleCheckout } = useContext(CartContext)
+  const { orderReceivedSuccessfully } = cartState
 
   const [selectedMethod, setSelectedMethod] = useState<PaymentProps['method']>()
 
@@ -64,6 +65,10 @@ export function Address() {
 
   const handleAddCheckout = useCallback(
     (type: PaymentProps['method']) => {
+      if (orderReceivedSuccessfully) {
+        return
+      }
+
       const errorsEmpty = Object.keys(errors).length === 0
 
       if (errorsEmpty) {
@@ -74,7 +79,7 @@ export function Address() {
         })
       }
     },
-    [errors, formData, handleCheckout],
+    [errors, formData, handleCheckout, orderReceivedSuccessfully],
   )
 
   return (
@@ -98,6 +103,7 @@ export function Address() {
             {...register('postalCode', {
               required: true,
             })}
+            readOnly={orderReceivedSuccessfully}
           />{' '}
           <br />
           <S.InputRua
@@ -110,6 +116,7 @@ export function Address() {
             {...register('address', {
               required: true,
             })}
+            readOnly={orderReceivedSuccessfully}
           />{' '}
           <br />
           <S.InputNumero
@@ -122,6 +129,7 @@ export function Address() {
             {...register('addressNumber', {
               required: true,
             })}
+            readOnly={orderReceivedSuccessfully}
           />
           <S.InputComplemento
             type="text"
@@ -133,6 +141,7 @@ export function Address() {
             {...register('addressComplement', {
               required: true,
             })}
+            readOnly={orderReceivedSuccessfully}
           />{' '}
           <br />
           <S.InputBairro
@@ -145,6 +154,7 @@ export function Address() {
             {...register('neighborhood', {
               required: true,
             })}
+            readOnly={orderReceivedSuccessfully}
           />
           <S.InputCidade
             type="text"
@@ -156,6 +166,7 @@ export function Address() {
             {...register('city', {
               required: true,
             })}
+            readOnly={orderReceivedSuccessfully}
           />
           <S.InputUf
             type="text"
@@ -167,6 +178,7 @@ export function Address() {
             {...register('state', {
               required: true,
             })}
+            readOnly={orderReceivedSuccessfully}
           />
         </form>
       </S.Address>

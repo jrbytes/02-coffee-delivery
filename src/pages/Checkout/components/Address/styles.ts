@@ -51,12 +51,16 @@ export const HeaderPayment = styled(HeaderBase)`
 export const Input = styled.input`
   ${({ theme }) => css`
     background-color: ${theme.base.input};
-    border: 1px solid ${theme.base.button};
     border-radius: ${theme.borderRadius};
 
     padding: ${theme.spacings.small} ${theme.spacings.small};
 
     ::placeholder {
+      color: ${theme.base.label};
+    }
+
+    :read-only {
+      background-color: ${theme.brand.yellowLight};
       color: ${theme.base.label};
     }
   `}
