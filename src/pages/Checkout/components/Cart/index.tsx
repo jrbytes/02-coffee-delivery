@@ -3,6 +3,7 @@ import * as S from './styles'
 import { CartContext } from '../../../../contexts/CartContext'
 import { Link, useNavigate } from 'react-router-dom'
 import { CartStateProps } from '../../../../reducers/cart/reducer'
+import { Trash } from 'phosphor-react'
 
 type ProductMemoizedProps = {
   product: CartStateProps['products'][0]
@@ -11,8 +12,13 @@ type ProductMemoizedProps = {
 }
 
 export function Cart() {
-  const { cartState, addProduct, removeProduct, handleOrderReceived } =
-    useContext(CartContext)
+  const {
+    cartState,
+    addProduct,
+    removeProduct,
+    handleOrderReceived,
+    handleRemoveProductFromCart,
+  } = useContext(CartContext)
   const { products, cart, orderReceivedSuccessfully } = cartState
   const navigate = useNavigate()
 
@@ -67,6 +73,13 @@ export function Cart() {
     navigate('/success')
   }, [handleOrderReceived, navigate])
 
+  const handleRemoveItems = useCallback(
+    (id: string) => {
+      handleRemoveProductFromCart(id)
+    },
+    [handleRemoveProductFromCart],
+  )
+
   return (
     <S.Cart>
       {cart && cart.items.length > 0 ? (
@@ -97,10 +110,12 @@ export function Cart() {
                         +
                       </S.MoreButton>
                     </div>
-                    {/* <S.RemoveButton>
+                    <S.RemoveButton
+                      onClick={() => handleRemoveItems(String(item.product.id))}
+                    >
                       <Trash size={16} />
                       remover
-                    </S.RemoveButton> */}
+                    </S.RemoveButton>
                   </S.ItemButtons>
                 </div>
               </S.ItemInfo>

@@ -6,6 +6,7 @@ export enum ActionTypes {
   LOAD_PRODUCTS = 'LOAD_PRODUCTS',
   ADD_ADDRESS_AND_PAYMENT_TYPE = 'ADD_ADDRESS_AND_PAYMENT_TYPE',
   ORDER_RECEIVED_SUCCESSFULLY = 'ORDER_RECEIVED_SUCCESSFULLY',
+  REMOVE_ITEM_TOTAL_FROM_CART = 'REMOVE_ITEM_TOTAL_FROM_CART',
 }
 
 export function addProductToCart(product: CartStateProps['products'][0]) {
@@ -38,5 +39,12 @@ export function addAddressAndPaymentType(checkout: CartStateProps['checkout']) {
 export function orderReceivedSuccessfully() {
   return {
     type: ActionTypes.ORDER_RECEIVED_SUCCESSFULLY,
+  }
+}
+
+export function removeItemTotalFromCart(id: string) {
+  return {
+    type: ActionTypes.REMOVE_ITEM_TOTAL_FROM_CART,
+    payload: { productId: id },
   }
 }

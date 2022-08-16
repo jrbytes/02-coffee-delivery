@@ -40,6 +40,33 @@ export interface CartStateProps {
 
 export function cartReducer(state: CartStateProps, action: any) {
   switch (action.type) {
+    case ActionTypes.REMOVE_ITEM_TOTAL_FROM_CART: {
+      const { productId } = action.payload
+
+      const cartItem = state.cart.items.find(
+        (item) => String(item.productId) === productId,
+      ) as CartProps['items'][0]
+
+      const newCart = {
+        ...state.cart,
+        totalCart: String(
+          Number(state.cart.totalCart) - Number(cartItem.total),
+        ),
+      }
+
+      const newItems = state.cart.items.filter(
+        (item) => String(item.productId) !== productId,
+      ) as CartProps['items']
+
+      return {
+        ...state,
+        cart: {
+          ...newCart,
+          items: newItems,
+        },
+      }
+    }
+
     case ActionTypes.ORDER_RECEIVED_SUCCESSFULLY: {
       return {
         ...state,
