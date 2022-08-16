@@ -10,6 +10,7 @@ export const defaultTheme = {
     text: '#574F4D',
     subtitle: '#403937',
     title: '#272221',
+    inative: '#626363',
   },
   brand: {
     purpleDark: '#4B2995',

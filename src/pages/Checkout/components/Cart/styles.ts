@@ -62,15 +62,22 @@ export const ItemButtons = styled.div`
   `}
 `
 
-export const Button = styled.button`
-  ${({ theme }) => css`
+type OrderReceivedSuccessfullyProps = {
+  orderReceivedSuccessfully: boolean
+}
+
+export const Button = styled.button<OrderReceivedSuccessfullyProps>`
+  ${({ theme, orderReceivedSuccessfully }) => css`
     width: ${theme.sizes.xlarge};
     height: ${theme.sizes.xlarge};
     border: 0;
-    color: ${theme.brand.purple};
     background-color: ${theme.base.button};
     font-size: ${theme.sizes.large};
-    cursor: pointer;
+
+    color: ${orderReceivedSuccessfully
+      ? theme.base.inative
+      : theme.brand.purple};
+    cursor: ${orderReceivedSuccessfully ? 'not-allowed' : 'pointer'};
   `}
 `
 
@@ -116,6 +123,24 @@ export const RemoveButton = styled.button`
   `}
 `
 
+export const ConfirmOrderButton = styled.button<OrderReceivedSuccessfullyProps>`
+  ${({ theme, orderReceivedSuccessfully }) => css`
+    width: 100%;
+    margin-top: ${theme.spacings.small};
+    padding: ${theme.spacings.small};
+    background-color: ${orderReceivedSuccessfully
+      ? theme.base.inative
+      : theme.brand.yellow};
+    color: ${theme.base.white};
+    border: 0;
+    border-radius: ${theme.borderRadius};
+    text-transform: uppercase;
+    font-size: ${theme.sizes.medium};
+    font-weight: ${theme.font.textWeight.bold};
+    cursor: ${orderReceivedSuccessfully ? 'not-allowed' : 'pointer'};
+  `}
+`
+
 export const ItemPrice = styled.div`
   ${({ theme }) => css`
     font-size: ${theme.sizes.large};
@@ -142,20 +167,6 @@ export const AccountStatement = styled.div`
           font-weight: ${theme.font.textWeight.bold};
         }
       }
-    }
-
-    button {
-      width: 100%;
-      margin-top: ${theme.spacings.small};
-      padding: ${theme.spacings.small};
-      background-color: ${theme.brand.yellow};
-      color: ${theme.base.white};
-      border: 0;
-      border-radius: ${theme.borderRadius};
-      text-transform: uppercase;
-      font-size: ${theme.sizes.medium};
-      font-weight: ${theme.font.textWeight.bold};
-      cursor: pointer;
     }
   `}
 `

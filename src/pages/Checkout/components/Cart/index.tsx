@@ -13,7 +13,7 @@ type ProductMemoizedProps = {
 export function Cart() {
   const { cartState, addProduct, removeProduct, handleOrderReceived } =
     useContext(CartContext)
-  const { products, cart } = cartState
+  const { products, cart, orderReceivedSuccessfully } = cartState
   const navigate = useNavigate()
 
   const memoizedItems = useMemo(() => {
@@ -27,6 +27,10 @@ export function Cart() {
   }, [cart.items, products]) as ProductMemoizedProps[]
 
   const handleAddProduct = (id: string) => {
+    if (orderReceivedSuccessfully) {
+      return
+    }
+
     const product = products.find((product) => product.id === parseInt(id))
     if (product) {
       addProduct(product)
@@ -34,6 +38,10 @@ export function Cart() {
   }
 
   const handleRemoveProduct = (id: string) => {
+    if (orderReceivedSuccessfully) {
+      return
+    }
+
     const product = products.find((product) => product.id === parseInt(id))
     if (product) {
       removeProduct(product)
@@ -72,6 +80,7 @@ export function Cart() {
                   <S.ItemButtons>
                     <div>
                       <S.MinusButton
+                        orderReceivedSuccessfully={orderReceivedSuccessfully}
                         onClick={() =>
                           handleRemoveProduct(String(item.product.id))
                         }
@@ -80,6 +89,7 @@ export function Cart() {
                       </S.MinusButton>
                       <span>{item.amount}</span>
                       <S.MoreButton
+                        orderReceivedSuccessfully={orderReceivedSuccessfully}
                         onClick={() =>
                           handleAddProduct(String(item.product.id))
                         }
@@ -121,9 +131,15 @@ export function Cart() {
                 Total <span>{total}</span>
               </p>
             </div>
-            <button onClick={() => handleOrderReceivedSuccessfully()}>
-              confirmar pedido
-            </button>
+            <S.ConfirmOrderButton
+              orderReceivedSuccessfully={orderReceivedSuccessfully}
+              onClick={() => handleOrderReceivedSuccessfully()}
+              disabled={orderReceivedSuccessfully}
+            >
+              {orderReceivedSuccessfully
+                ? 'pedido em processo de entrega'
+                : 'confirmar pedido'}
+            </S.ConfirmOrderButton>
           </S.AccountStatement>
         </>
       ) : (
