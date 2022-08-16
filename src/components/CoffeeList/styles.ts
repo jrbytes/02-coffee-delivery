@@ -100,8 +100,12 @@ export const Price = styled.div`
   `}
 `
 
-export const Amount = styled.div`
-  ${({ theme }) => css`
+type OrderReceivedSuccessfullyProps = {
+  orderReceivedSuccessfully: boolean
+}
+
+export const Amount = styled.div<OrderReceivedSuccessfullyProps>`
+  ${({ theme, orderReceivedSuccessfully }) => css`
     display: flex;
     align-items: center;
     background-color: ${theme.base.button};
@@ -111,7 +115,9 @@ export const Amount = styled.div`
       width: 2rem;
       height: 2rem;
       border: 0;
-      color: ${theme.brand.purple};
+      color: ${orderReceivedSuccessfully
+        ? theme.base.inative
+        : theme.brand.purple};
       background-color: ${theme.base.button};
       cursor: pointer;
 

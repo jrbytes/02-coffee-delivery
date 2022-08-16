@@ -1,7 +1,8 @@
 import { ShoppingCart } from 'phosphor-react'
-import { useCallback, useContext, useMemo } from 'react'
+import { useCallback, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { CartContext, ProductProps } from '../../contexts/CartContext'
+import { CartContext } from '../../contexts/CartContext'
+import { ProductProps } from '../../reducers/cart/reducer'
 import {
   Amount,
   ButtonCart,
@@ -16,13 +17,21 @@ import {
 export function Card(props: ProductProps) {
   const navigate = useNavigate()
   const { cartState, addProduct, removeProduct } = useContext(CartContext)
-  const cart = cartState.cart
+  const { cart, orderReceivedSuccessfully } = cartState
 
   const handleAddProduct = (data: ProductProps) => {
+    if (orderReceivedSuccessfully) {
+      return
+    }
+
     addProduct(data)
   }
 
   const handleRemoveProduct = (data: ProductProps) => {
+    if (orderReceivedSuccessfully) {
+      return
+    }
+
     removeProduct(data)
   }
 
@@ -59,7 +68,7 @@ export function Card(props: ProductProps) {
           <span>R$</span>
           <span>{formatPrice}</span>
         </Price>
-        <Amount>
+        <Amount orderReceivedSuccessfully={orderReceivedSuccessfully}>
           <button onClick={() => handleRemoveProduct(props)}>-</button>
           <span>{amount(props.id)}</span>
           <button onClick={() => handleAddProduct(props)}>+</button>
