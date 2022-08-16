@@ -123,12 +123,16 @@ export const RemoveButton = styled.button`
   `}
 `
 
-export const ConfirmOrderButton = styled.button<OrderReceivedSuccessfullyProps>`
-  ${({ theme, orderReceivedSuccessfully }) => css`
+type ConfirmOrderProps = {
+  isPermittedToConfirmOrder: boolean
+}
+
+export const ConfirmOrderButton = styled.button<ConfirmOrderProps>`
+  ${({ theme, isPermittedToConfirmOrder }) => css`
     width: 100%;
     margin-top: ${theme.spacings.small};
     padding: ${theme.spacings.small};
-    background-color: ${orderReceivedSuccessfully
+    background-color: ${isPermittedToConfirmOrder
       ? theme.base.inative
       : theme.brand.yellow};
     color: ${theme.base.white};
@@ -137,7 +141,7 @@ export const ConfirmOrderButton = styled.button<OrderReceivedSuccessfullyProps>`
     text-transform: uppercase;
     font-size: ${theme.sizes.medium};
     font-weight: ${theme.font.textWeight.bold};
-    cursor: ${orderReceivedSuccessfully ? 'not-allowed' : 'pointer'};
+    cursor: ${isPermittedToConfirmOrder ? 'not-allowed' : 'pointer'};
   `}
 `
 

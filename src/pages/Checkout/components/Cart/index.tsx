@@ -1,4 +1,4 @@
-import { useCallback, useContext, useMemo } from 'react'
+import { useCallback, useContext, useMemo, useState } from 'react'
 import * as S from './styles'
 import { CartContext } from '../../../../contexts/CartContext'
 import { Link, useNavigate } from 'react-router-dom'
@@ -33,9 +33,7 @@ export function Cart() {
   }, [cart.items, products]) as ProductMemoizedProps[]
 
   const handleAddProduct = (id: string) => {
-    if (orderReceivedSuccessfully) {
-      return
-    }
+    if (orderReceivedSuccessfully) return
 
     const product = products.find((product) => product.id === parseInt(id))
     if (product) {
@@ -44,9 +42,7 @@ export function Cart() {
   }
 
   const handleRemoveProduct = (id: string) => {
-    if (orderReceivedSuccessfully) {
-      return
-    }
+    if (orderReceivedSuccessfully) return
 
     const product = products.find((product) => product.id === parseInt(id))
     if (product) {
@@ -147,9 +143,13 @@ export function Cart() {
               </p>
             </div>
             <S.ConfirmOrderButton
-              orderReceivedSuccessfully={orderReceivedSuccessfully}
+              isPermittedToConfirmOrder={
+                orderReceivedSuccessfully || !cartState.checkout.paymentType
+              }
               onClick={() => handleOrderReceivedSuccessfully()}
-              disabled={orderReceivedSuccessfully}
+              disabled={
+                orderReceivedSuccessfully || !cartState.checkout.paymentType
+              }
             >
               {orderReceivedSuccessfully
                 ? 'pedido em processo de entrega'
