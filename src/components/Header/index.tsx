@@ -9,7 +9,7 @@ import { useContext } from 'react'
 export function Header() {
   const navigate = useNavigate()
   const { cartState } = useContext(CartContext)
-  const cart = cartState.cart
+  const { cart, orderReceivedSuccessfully } = cartState
 
   const amountProductTotal = cart.items ? cart.items.length : 0
 
@@ -29,8 +29,9 @@ export function Header() {
         </span>
         <button onClick={() => navigate('/checkout')}>
           <ShoppingCart weight="fill" size={20} />
-
-          <AmountQuantity>{amountProductTotal}</AmountQuantity>
+          {!orderReceivedSuccessfully && (
+            <AmountQuantity>{amountProductTotal}</AmountQuantity>
+          )}
         </button>
       </Location>
     </HeaderContainer>
