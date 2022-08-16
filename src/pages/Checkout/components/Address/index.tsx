@@ -193,7 +193,10 @@ export function Address() {
               </p>
             </div>
           </S.HeaderPayment>
-          <S.Methods method={selectedMethod}>
+          <S.Methods
+            method={selectedMethod}
+            orderReceivedSuccessfully={orderReceivedSuccessfully}
+          >
             <button
               name="credit-card"
               onClick={() => handleAddCheckout('credit-card')}

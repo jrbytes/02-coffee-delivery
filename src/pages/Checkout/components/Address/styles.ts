@@ -123,12 +123,13 @@ export const Payment = styled.div`
   `}
 `
 
-type PaymentMethodProps = {
+type PaymentMethodAndOrderReceivedProps = {
   method?: 'debit-card' | 'credit-card' | 'cash'
+  orderReceivedSuccessfully: boolean
 }
 
-export const Methods = styled.div<PaymentMethodProps>`
-  ${({ theme, method }) => css`
+export const Methods = styled.div<PaymentMethodAndOrderReceivedProps>`
+  ${({ theme, method, orderReceivedSuccessfully }) => css`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: ${theme.spacings.small};
@@ -145,7 +146,7 @@ export const Methods = styled.div<PaymentMethodProps>`
       text-transform: uppercase;
       font-size: ${theme.sizes.small};
       color: ${theme.base.text};
-      cursor: pointer;
+      cursor: ${orderReceivedSuccessfully ? 'not-allowed' : 'pointer'};
 
       box-shadow: none;
 
@@ -155,7 +156,9 @@ export const Methods = styled.div<PaymentMethodProps>`
     }
 
     button[name='${method}'] {
-      background-color: ${theme.brand.purpleLight};
+      background-color: ${orderReceivedSuccessfully
+        ? theme.base.button
+        : theme.brand.purpleLight};
       border: 1px solid ${theme.brand.purple};
     }
   `}
