@@ -35,10 +35,28 @@ export interface CartStateProps {
   products: ProductProps[]
   cart: CartProps
   checkout: CheckoutProps
+  orderReceivedSuccessfully: boolean
 }
 
 export function cartReducer(state: CartStateProps, action: any) {
   switch (action.type) {
+    case ActionTypes.ORDER_RECEIVED_SUCCESSFULLY: {
+      return {
+        ...state,
+        orderReceivedSuccessfully: true,
+      }
+    }
+
+    case ActionTypes.ADD_ADDRESS_AND_PAYMENT_TYPE: {
+      const { address, paymentType } = action.payload.checkout
+      return {
+        ...state,
+        checkout: {
+          address,
+          paymentType,
+        },
+      }
+    }
     case ActionTypes.LOAD_PRODUCTS: {
       return {
         ...state,

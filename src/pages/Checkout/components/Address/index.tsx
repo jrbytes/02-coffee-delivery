@@ -26,8 +26,7 @@ type PaymentProps = {
 }
 
 export function Address() {
-  const { cartState } = useContext(CartContext)
-  const checkout = cartState.checkout
+  const { cartState, handleCheckout } = useContext(CartContext)
 
   const [selectedMethod, setSelectedMethod] = useState<PaymentProps['method']>()
 
@@ -38,17 +37,20 @@ export function Address() {
   const formData = watch()
 
   useEffect(() => {
-    if (checkout.address) {
-      setValue('postalCode', checkout.address.postalCode)
-      setValue('address', checkout.address.address)
-      setValue('addressNumber', checkout.address.addressNumber)
-      setValue('addressComplement', checkout.address.addressComplement)
-      setValue('neighborhood', checkout.address.neighborhood)
-      setValue('city', checkout.address.city)
-      setValue('state', checkout.address.state)
-      setSelectedMethod(checkout.paymentType)
+    if (cartState.checkout.address) {
+      setValue('postalCode', cartState.checkout.address.postalCode)
+      setValue('address', cartState.checkout.address.address)
+      setValue('addressNumber', cartState.checkout.address.addressNumber)
+      setValue(
+        'addressComplement',
+        cartState.checkout.address.addressComplement,
+      )
+      setValue('neighborhood', cartState.checkout.address.neighborhood)
+      setValue('city', cartState.checkout.address.city)
+      setValue('state', cartState.checkout.address.state)
+      setSelectedMethod(cartState.checkout.paymentType)
     }
-  }, [setValue, checkout, selectedMethod])
+  }, [setValue, cartState.checkout, selectedMethod])
 
   const border = (error: boolean) => {
     return error
@@ -66,16 +68,13 @@ export function Address() {
 
       if (errorsEmpty) {
         setSelectedMethod(type)
-        // setCartState({
-        //   ...cartState,
-        //   checkout: {
-        //     address: { ...formData },
-        //     paymentType: type,
-        //   },
-        // })
+        handleCheckout({
+          address: formData,
+          paymentType: type,
+        })
       }
     },
-    [errors],
+    [errors, formData, handleCheckout],
   )
 
   return (
@@ -171,7 +170,7 @@ export function Address() {
           />
         </form>
       </S.Address>
-      {(isValid || checkout.paymentType) && (
+      {(isValid || cartState.checkout.paymentType) && (
         <S.Payment>
           <S.HeaderPayment>
             <CurrencyDollar size={22} />

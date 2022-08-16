@@ -1,25 +1,30 @@
-import { useContext, useMemo } from 'react'
+import { useCallback, useContext, useMemo } from 'react'
 import * as S from './styles'
-import { CartContext, ProductProps } from '../../../../contexts/CartContext'
-import { Link } from 'react-router-dom'
+import { CartContext } from '../../../../contexts/CartContext'
+import { Link, useNavigate } from 'react-router-dom'
+import { CartStateProps } from '../../../../reducers/cart/reducer'
 
 type ProductMemoizedProps = {
-  product: ProductProps
+  product: CartStateProps['products'][0]
   amount: number
   total: string
 }
 
 export function Cart() {
-  const { cartState, addProduct, removeProduct } = useContext(CartContext)
+  const { cartState, addProduct, removeProduct, handleOrderReceived } =
+    useContext(CartContext)
   const { products, cart } = cartState
+  const navigate = useNavigate()
 
   const memoizedItems = useMemo(() => {
-    return cart?.items.map((item) => ({
-      product: { ...products.find((product) => product.id === item.productId) },
+    return cart.items.map((item) => ({
+      product: {
+        ...products.find((product) => product.id === item.productId),
+      },
       amount: item.amount,
       total: item.total,
     }))
-  }, [cart?.items, products]) as ProductMemoizedProps[]
+  }, [cart.items, products]) as ProductMemoizedProps[]
 
   const handleAddProduct = (id: string) => {
     const product = products.find((product) => product.id === parseInt(id))
@@ -48,6 +53,11 @@ export function Cart() {
       style: 'currency',
       currency: 'BRL',
     }).format(parseFloat(cart.totalCart) + frete)
+
+  const handleOrderReceivedSuccessfully = useCallback(() => {
+    handleOrderReceived()
+    navigate('/success')
+  }, [handleOrderReceived, navigate])
 
   return (
     <S.Cart>
@@ -111,7 +121,9 @@ export function Cart() {
                 Total <span>{total}</span>
               </p>
             </div>
-            <button>confirmar pedido</button>
+            <button onClick={() => handleOrderReceivedSuccessfully()}>
+              confirmar pedido
+            </button>
           </S.AccountStatement>
         </>
       ) : (

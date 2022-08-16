@@ -9,6 +9,8 @@ import {
   loadProducts,
   addProductToCart,
   removeProductFromCart,
+  addAddressAndPaymentType,
+  orderReceivedSuccessfully,
 } from '../reducers/cart/actions'
 import { cartReducer, CartStateProps } from '../reducers/cart/reducer'
 
@@ -16,7 +18,8 @@ interface CartContextType {
   cartState: CartStateProps
   addProduct: (product: CartStateProps['products'][0]) => void
   removeProduct: (product: CartStateProps['products'][0]) => void
-  // clearCart: () => void
+  handleCheckout: (checkout: CartStateProps['checkout']) => void
+  handleOrderReceived: () => void
 }
 
 export const CartContext = createContext<CartContextType>({} as CartContextType)
@@ -36,6 +39,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
       address: {} as CartStateProps['checkout']['address'],
       paymentType: undefined,
     },
+    orderReceivedSuccessfully: false,
   })
 
   useEffect(() => {
@@ -53,12 +57,22 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     [],
   )
 
+  const handleCheckout = useCallback((checkout: CartStateProps['checkout']) => {
+    dispatch(addAddressAndPaymentType(checkout))
+  }, [])
+
+  const handleOrderReceived = useCallback(() => {
+    dispatch(orderReceivedSuccessfully())
+  }, [])
+
   return (
     <CartContext.Provider
       value={{
         cartState,
         addProduct,
         removeProduct,
+        handleCheckout,
+        handleOrderReceived,
       }}
     >
       {children}
