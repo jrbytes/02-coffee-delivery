@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { CartStateProps } from './reducer'
 
 export enum ActionTypes {

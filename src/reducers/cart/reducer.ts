@@ -68,6 +68,8 @@ export function cartReducer(state: CartStateProps, action: any) {
     }
 
     case ActionTypes.ORDER_RECEIVED_SUCCESSFULLY: {
+      if (!state.checkout.paymentType) return { ...state }
+
       return {
         ...state,
         orderReceivedSuccessfully: true,

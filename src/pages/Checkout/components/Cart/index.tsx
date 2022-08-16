@@ -1,4 +1,4 @@
-import { useCallback, useContext, useMemo, useState } from 'react'
+import { useCallback, useContext, useMemo } from 'react'
 import * as S from './styles'
 import { CartContext } from '../../../../contexts/CartContext'
 import { Link, useNavigate } from 'react-router-dom'
