@@ -7,7 +7,7 @@ type AddressFormData = {
   postalCode: string
   address: string
   addressNumber: string
-  addressComplement: string
+  addressComplement?: string
   neighborhood: string
   city: string
   state: string

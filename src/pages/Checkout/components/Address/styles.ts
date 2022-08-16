@@ -67,51 +67,46 @@ export const Input = styled.input`
 `
 
 export const InputCep = styled(Input)`
-  ${({ theme }) => css`
-    width: 30%;
-    margin-bottom: ${theme.spacings.medium};
-  `}
+  width: 30%;
 `
 
 export const InputRua = styled(Input)`
-  ${({ theme }) => css`
-    width: 100%;
-    margin-bottom: ${theme.spacings.medium};
-  `}
+  width: 100%;
 `
 
-export const InputNumero = styled(Input)`
-  ${({ theme }) => css`
-    width: 30%;
-    margin-right: 5%;
-    margin-bottom: ${theme.spacings.medium};
-  `}
+export const InputNumero = styled(Input)``
+
+export const InputComplementoGroup = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  position: relative;
 `
 
 export const InputComplemento = styled(Input)`
+  width: 100%;
+`
+
+export const InputComplementoOptional = styled.em`
   ${({ theme }) => css`
-    width: 65%;
+    position: absolute;
+    right: ${theme.spacings.medium};
+
+    color: ${theme.base.label};
   `}
 `
 
 export const InputBairro = styled(Input)`
-  ${({ theme }) => css`
-    width: 30%;
-    margin-right: 5%;
-  `}
+  width: 100%;
 `
 
 export const InputCidade = styled(Input)`
-  ${({ theme }) => css`
-    width: 50%;
-    margin-right: 5%;
-  `}
+  width: 100%;
 `
 
 export const InputUf = styled(Input)`
-  ${({ theme }) => css`
-    width: 10%;
-  `}
+  width: 100%;
 `
 
 export const Payment = styled.div`

@@ -15,7 +15,7 @@ type AddressFormData = {
   postalCode: string
   address: string
   addressNumber: string
-  addressComplement: string
+  addressComplement?: string
   neighborhood: string
   city: string
   state: string
@@ -93,93 +93,120 @@ export function Address() {
           </div>
         </S.HeaderAddress>
         <form>
-          <S.InputCep
-            type="text"
-            placeholder="CEP"
-            style={{
-              border: border(!!errors.postalCode),
-              boxShadow: boxShadow(!!errors.postalCode),
-            }}
-            {...register('postalCode', {
-              required: true,
-            })}
-            readOnly={orderReceivedSuccessfully}
-          />{' '}
+          <div>
+            <S.InputCep
+              type="text"
+              placeholder="CEP"
+              style={{
+                border: border(!!errors.postalCode),
+                boxShadow: boxShadow(!!errors.postalCode),
+              }}
+              {...register('postalCode', {
+                required: true,
+              })}
+              readOnly={orderReceivedSuccessfully}
+            />
+          </div>
           <br />
-          <S.InputRua
-            type="text"
-            placeholder="Rua"
-            style={{
-              border: border(!!errors.address),
-              boxShadow: boxShadow(!!errors.address),
-            }}
-            {...register('address', {
-              required: true,
-            })}
-            readOnly={orderReceivedSuccessfully}
-          />{' '}
+          <div>
+            <S.InputRua
+              type="text"
+              placeholder="Rua"
+              style={{
+                border: border(!!errors.address),
+                boxShadow: boxShadow(!!errors.address),
+              }}
+              {...register('address', {
+                required: true,
+              })}
+              readOnly={orderReceivedSuccessfully}
+            />
+          </div>
           <br />
-          <S.InputNumero
-            type="text"
-            placeholder="Número"
+          <div
             style={{
-              border: border(!!errors.addressNumber),
-              boxShadow: boxShadow(!!errors.addressNumber),
+              width: '100%',
+              display: 'grid',
+              gap: '1rem',
+              gridTemplateColumns: '0.6fr 1.4fr',
             }}
-            {...register('addressNumber', {
-              required: true,
-            })}
-            readOnly={orderReceivedSuccessfully}
-          />
-          <S.InputComplemento
-            type="text"
-            placeholder="Complemento"
-            style={{
-              border: border(!!errors.addressComplement),
-              boxShadow: boxShadow(!!errors.addressComplement),
-            }}
-            {...register('addressComplement', {
-              required: true,
-            })}
-            readOnly={orderReceivedSuccessfully}
-          />{' '}
+          >
+            <S.InputNumero
+              type="text"
+              placeholder="Número"
+              style={{
+                border: border(!!errors.addressNumber),
+                boxShadow: boxShadow(!!errors.addressNumber),
+              }}
+              {...register('addressNumber', {
+                required: true,
+              })}
+              readOnly={orderReceivedSuccessfully}
+            />
+            <S.InputComplementoGroup>
+              <S.InputComplemento
+                type="text"
+                placeholder="Complemento"
+                style={{
+                  border: border(!!errors.addressComplement),
+                  boxShadow: boxShadow(!!errors.addressComplement),
+                }}
+                {...register('addressComplement')}
+                readOnly={orderReceivedSuccessfully}
+              />
+              {!formData.addressComplement && (
+                <S.InputComplementoOptional>
+                  Opcional
+                </S.InputComplementoOptional>
+              )}
+            </S.InputComplementoGroup>
+          </div>
           <br />
-          <S.InputBairro
-            type="text"
-            placeholder="Bairro"
+          <div
             style={{
-              border: border(!!errors.neighborhood),
-              boxShadow: boxShadow(!!errors.neighborhood),
+              width: '100%',
+              display: 'grid',
+              gap: '1rem',
+              gridTemplateColumns: '3fr 5fr 2fr',
             }}
-            {...register('neighborhood', {
-              required: true,
-            })}
-            readOnly={orderReceivedSuccessfully}
-          />
-          <S.InputCidade
-            type="text"
-            placeholder="Cidade"
-            style={{
-              border: border(!!errors.city),
-              boxShadow: boxShadow(!!errors.city),
-            }}
-            {...register('city', {
-              required: true,
-            })}
-            readOnly={orderReceivedSuccessfully}
-          />
-          <S.InputUf
-            type="text"
-            placeholder="UF"
-            style={{
-              border: border(!!errors.state),
-              boxShadow: boxShadow(!!errors.state),
-            }}
-            {...register('state', {
-              required: true,
-            })}
-            readOnly={orderReceivedSuccessfully}
-          />
+          >
+            <S.InputBairro
+              type="text"
+              placeholder="Bairro"
+              style={{
+                border: border(!!errors.neighborhood),
+                boxShadow: boxShadow(!!errors.neighborhood),
+              }}
+              {...register('neighborhood', {
+                required: true,
+              })}
+              readOnly={orderReceivedSuccessfully}
+            />
+            <S.InputCidade
+              type="text"
+              placeholder="Cidade"
+              style={{
+                border: border(!!errors.city),
+                boxShadow: boxShadow(!!errors.city),
+              }}
+              {...register('city', {
+                required: true,
+              })}
+              readOnly={orderReceivedSuccessfully}
+            />
+            <S.InputUf
+              type="text"
+              placeholder="UF"
+              style={{
+                border: border(!!errors.state),
+                boxShadow: boxShadow(!!errors.state),
+              }}
+              {...register('state', {
+                required: true,
+              })}
+              readOnly={orderReceivedSuccessfully}
+            />
+          </div>
         </form>
       </S.Address>
       {(isValid || cartState.checkout.paymentType) && (
