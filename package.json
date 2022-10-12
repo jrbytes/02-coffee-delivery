@@ -2,6 +2,7 @@
   "name": "02-coffee-delivery",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://jrbytes.github.io/02-coffee-delivery",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
