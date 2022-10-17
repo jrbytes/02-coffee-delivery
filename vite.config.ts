@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/02-coffee-delivery/',
   plugins: [react()],
   server: {
     port: 3000,

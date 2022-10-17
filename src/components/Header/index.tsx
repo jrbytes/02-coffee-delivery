@@ -25,7 +25,7 @@ export function Header() {
       <Location>
         <span>
           <MapPin weight="fill" size={20} />
-          Porto Alegre, RS
+          Itabuna, BA
         </span>
         <button onClick={() => navigate('/checkout')}>
           <ShoppingCart weight="fill" size={20} />
