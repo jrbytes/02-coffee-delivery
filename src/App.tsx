@@ -5,12 +5,13 @@ import { CartContextProvider } from './contexts/CartContext'
 import { Router } from './Router'
 import { GlobalStyle } from './styles/global'
 import { defaultTheme } from './styles/themes/default'
+import { repo } from './config/repo'
 
 export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CartContextProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={`/${repo}`}>
           <Header />
           <Router />
         </BrowserRouter>
