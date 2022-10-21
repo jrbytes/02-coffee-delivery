@@ -2,29 +2,39 @@ import styled, { css } from 'styled-components'
 import background from '../../assets/background.png'
 
 export const Container = styled.div`
-  background-image: url(${background});
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 544px;
+  ${({ theme }) => css`
+    background-image: url(${background});
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 544px;
+
+    @media (max-width: ${theme.grid.container}) {
+      height: auto;
+    }
+  `}
 `
 
 export const Wrapper = styled.div`
-  max-width: 74rem;
-  width: 100%;
-  margin: 0 auto;
+  ${({ theme }) => css`
+    max-width: ${theme.grid.container};
+    width: 100%;
+    margin: 0 auto;
 
-  display: flex;
-  align-content: space-between;
+    display: flex;
 
-  padding-top: 5rem;
+    margin-top: 5rem;
 
-  position: relative;
+    @media (max-width: ${theme.grid.container}) {
+      margin-top: ${theme.spacings.medium};
+      padding: ${theme.spacings.small};
+
+      flex-direction: column;
+    }
+  `}
 `
 
 export const Content = styled.div`
   ${({ theme }) => css`
-    width: 50%;
-
     h4 {
       font-family: ${theme.font.title};
       font-weight: ${theme.font.titleWeight.boldTwo};
@@ -39,28 +49,51 @@ export const Content = styled.div`
 
       line-height: 1.8;
     }
+
+    @media (max-width: ${theme.grid.container}) {
+      h4 {
+        font-size: ${theme.sizes.xlarge};
+        line-height: 1;
+      }
+
+      p {
+        font-size: ${theme.sizes.small};
+        line-height: 1;
+      }
+    }
   `}
 `
 
 export const Image = styled.img`
-  position: absolute;
-  right: 0;
+  ${({ theme }) => css`
+    @media (max-width: ${theme.grid.container}) {
+      max-width: 476px;
+      max-height: 360px;
+    }
+  `}
 `
 
 export const Tips = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  ${({ theme }) => css`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 
-  padding-top: ${({ theme }) => theme.spacings.xlarge};
+    padding-top: ${({ theme }) => theme.spacings.xlarge};
+
+    @media (max-width: ${theme.grid.container}) {
+      padding-top: ${({ theme }) => theme.spacings.medium};
+      gap: 0.5rem;
+    }
+  `}
 `
 
 export const ItemBase = styled.div`
-  display: flex;
-  align-items: center;
-  width: 45%;
-
   ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    width: 45%;
+
     gap: ${theme.spacings.xsmall};
     color: ${theme.base.text};
     font-size: ${theme.sizes.small};
@@ -78,6 +111,11 @@ export const ItemBase = styled.div`
       height: 1.8rem;
       border-radius: 50%;
       padding: ${theme.spacings.xsmall};
+    }
+
+    @media (max-width: ${theme.grid.container}) {
+      padding-left: ${theme.spacings.xsmall};
+      width: 100%;
     }
   `}
 `
