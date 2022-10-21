@@ -1,14 +1,20 @@
 import styled, { css } from 'styled-components'
 
 export const HeaderContainer = styled.header`
-  max-width: 74rem;
-  width: 100%;
-  margin: 0 auto;
-  padding: ${({ theme }) => theme.spacings.large} 0;
+  ${({ theme }) => css`
+    max-width: ${theme.grid.container};
+    width: 100%;
+    margin: 0 auto;
+    padding: ${theme.spacings.large} 0;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (max-width: ${theme.grid.container}) {
+      padding: ${theme.spacings.small};
+    }
+  `}
 `
 
 export const Location = styled.div`

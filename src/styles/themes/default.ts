@@ -50,6 +50,7 @@ export const defaultTheme = {
   },
   borderRadius: '4px',
   grid: {
+    container: '74rem',
     gutterBottom: '8rem',
   },
 }

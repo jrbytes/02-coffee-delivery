@@ -1,10 +1,10 @@
-import { MapPin, ShoppingCart } from 'phosphor-react'
-import { useNavigate } from 'react-router-dom'
-
-import { AmountQuantity, HeaderContainer, Location } from './styles'
-import logo from '../../assets/logo.svg'
-import { CartContext } from '../../contexts/CartContext'
 import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { MapPin, ShoppingCart } from 'phosphor-react'
+
+import { CartContext } from '../../contexts/CartContext'
+import * as S from './styles'
+import logo from '../../assets/logo.svg'
 
 export function Header() {
   const navigate = useNavigate()
@@ -14,7 +14,7 @@ export function Header() {
   const amountProductTotal = cart.items ? cart.items.length : 0
 
   return (
-    <HeaderContainer>
+    <S.HeaderContainer>
       <img
         src={logo}
         alt="Logo do Coffee Delivery"
@@ -22,7 +22,7 @@ export function Header() {
         style={{ cursor: 'pointer' }}
       />
 
-      <Location>
+      <S.Location>
         <span>
           <MapPin weight="fill" size={20} />
           Itabuna, BA
@@ -30,10 +30,10 @@ export function Header() {
         <button onClick={() => navigate('/checkout')}>
           <ShoppingCart weight="fill" size={20} />
           {!orderReceivedSuccessfully && (
-            <AmountQuantity>{amountProductTotal}</AmountQuantity>
+            <S.AmountQuantity>{amountProductTotal}</S.AmountQuantity>
           )}
         </button>
-      </Location>
-    </HeaderContainer>
+      </S.Location>
+    </S.HeaderContainer>
   )
 }
