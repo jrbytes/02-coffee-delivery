@@ -5,6 +5,10 @@ export const Address = styled.div`
     background-color: ${theme.base.card};
     border-radius: ${theme.borderRadius};
     padding: ${theme.spacings.xlarge};
+
+    @media (max-width: 768px) {
+      padding: ${theme.spacings.medium};
+    }
   `}
 `
 
@@ -68,10 +72,28 @@ export const Input = styled.input`
 
 export const InputCep = styled(Input)`
   width: 30%;
+
+  @media (max-width: 768px) {
+    width: 50%;
+  }
 `
 
 export const InputRua = styled(Input)`
   width: 100%;
+`
+
+export const InputsNumeroComplemento = styled.div`
+  ${({ theme }) => css`
+    width: 100%;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 0.6fr 1.4fr;
+
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+    }
+  `}
 `
 
 export const InputNumero = styled(Input)``
@@ -97,6 +119,18 @@ export const InputComplementoOptional = styled.em`
   `}
 `
 
+export const InputsBairroCidadeUf = styled.div`
+  width: 100%;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 3fr 5fr 2fr;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
+`
+
 export const InputBairro = styled(Input)`
   width: 100%;
 `
@@ -107,6 +141,10 @@ export const InputCidade = styled(Input)`
 
 export const InputUf = styled(Input)`
   width: 100%;
+
+  @media (max-width: 768px) {
+    width: 30%;
+  }
 `
 
 export const Payment = styled.div`
@@ -115,6 +153,10 @@ export const Payment = styled.div`
     background-color: ${theme.base.card};
     border-radius: ${theme.borderRadius};
     padding: ${theme.spacings.xlarge};
+
+    @media (max-width: 768px) {
+      padding: ${theme.spacings.medium};
+    }
   `}
 `
 
@@ -155,6 +197,11 @@ export const Methods = styled.div<PaymentMethodAndOrderReceivedProps>`
         ? theme.base.button
         : theme.brand.purpleLight};
       border: 1px solid ${theme.brand.purple};
+    }
+
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
     }
   `}
 `

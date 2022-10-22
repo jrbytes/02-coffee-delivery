@@ -123,14 +123,7 @@ export function Address() {
             />
           </div>
           <br />
-          <div
-            style={{
-              width: '100%',
-              display: 'grid',
-              gap: '1rem',
-              gridTemplateColumns: '0.6fr 1.4fr',
-            }}
-          >
+          <S.InputsNumeroComplemento>
             <S.InputNumero
               type="text"
               placeholder="Número"
@@ -160,16 +153,9 @@ export function Address() {
                 </S.InputComplementoOptional>
               )}
             </S.InputComplementoGroup>
-          </div>
+          </S.InputsNumeroComplemento>
           <br />
-          <div
-            style={{
-              width: '100%',
-              display: 'grid',
-              gap: '1rem',
-              gridTemplateColumns: '3fr 5fr 2fr',
-            }}
-          >
+          <S.InputsBairroCidadeUf>
             <S.InputBairro
               type="text"
               placeholder="Bairro"
@@ -206,7 +192,7 @@ export function Address() {
               })}
               readOnly={orderReceivedSuccessfully}
             />
-          </div>
+          </S.InputsBairroCidadeUf>
         </form>
       </S.Address>
       {(isValid || cartState.checkout.paymentType) && (

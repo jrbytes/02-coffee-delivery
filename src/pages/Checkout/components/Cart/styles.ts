@@ -8,6 +8,10 @@ export const Cart = styled.div`
     border-top-left-radius: ${theme.borderRadius};
     border-bottom-left-radius: ${theme.sizes.xlarge};
     border-bottom-right-radius: ${theme.borderRadius};
+
+    @media (max-width: 768px) {
+      padding: ${theme.spacings.medium};
+    }
   `}
 `
 
@@ -21,6 +25,11 @@ export const Item = styled.div`
     margin-bottom: ${theme.spacings.large};
 
     border-bottom: 1px solid ${theme.base.button};
+
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+    }
   `}
 `
 
@@ -41,6 +50,13 @@ export const ItemInfo = styled.div`
         margin-bottom: ${theme.spacings.xsmall};
       }
     }
+
+    @media (max-width: 768px) {
+      width: 100%;
+      div {
+        width: 100%;
+      }
+    }
   `}
 `
 
@@ -58,6 +74,13 @@ export const ItemButtons = styled.div`
 
       background-color: ${theme.base.button};
       border-radius: ${theme.borderRadius};
+    }
+
+    @media (max-width: 768px) {
+      div {
+        display: flex;
+        justify-content: space-between;
+      }
     }
   `}
 `
@@ -150,6 +173,17 @@ export const ItemPrice = styled.div`
     font-size: ${theme.sizes.large};
     font-weight: ${theme.font.textWeight.bold};
     color: ${theme.base.text};
+
+    @media (max-width: 768px) {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: ${theme.spacings.small};
+      background-color: ${theme.base.button};
+      border: 1px solid ${theme.base.hover};
+      border-radius: ${theme.borderRadius};
+      padding: ${theme.spacings.xsmall};
+    }
   `}
 `
 
