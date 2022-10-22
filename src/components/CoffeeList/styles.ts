@@ -1,13 +1,23 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
-  max-width: 74rem;
-  width: 100%;
-  margin: 0 auto;
+  ${({ theme }) => css`
+    max-width: ${theme.grid.container};
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 ${theme.spacings.small};
 
-  h2 {
-    margin-bottom: 4rem;
-  }
+    h2 {
+      margin-bottom: 4rem;
+    }
+
+    @media (max-width: ${theme.grid.container}) {
+      h2 {
+        margin-top: 2rem;
+        margin-bottom: 5.5rem;
+      }
+    }
+  `}
 `
 
 export const Content = styled.div`
@@ -17,24 +27,41 @@ export const Content = styled.div`
 
     gap: ${theme.spacings.xlarge};
     margin-bottom: ${theme.grid.gutterBottom};
+
+    @media (max-width: ${theme.grid.container}) {
+      justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+      gap: 5.5rem;
+    }
   `}
 `
 
 export const Item = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
   ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     img {
       margin-top: -${theme.spacings.xlarge};
       filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.2));
     }
+
     width: 16.5rem;
     border-top-right-radius: ${theme.sizes.xlarge};
     border-bottom-left-radius: ${theme.sizes.xlarge};
     background-color: ${theme.base.card};
     padding: ${theme.spacings.small} ${theme.spacings.medium};
+
+    @media (max-width: 768px) {
+      width: 100%;
+
+      img {
+        margin-top: -4.5rem;
+      }
+    }
   `}
 `
 
