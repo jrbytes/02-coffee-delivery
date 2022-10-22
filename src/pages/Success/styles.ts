@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   ${({ theme }) => css`
-    max-width: 74rem;
+    max-width: ${theme.grid.container};
     width: 100%;
     margin: 0 auto;
     padding-bottom: ${theme.grid.gutterBottom};
@@ -20,6 +20,21 @@ export const Container = styled.div`
       p {
         color: ${theme.base.subtitle};
       }
+    }
+
+    @media (max-width: ${theme.grid.container}) {
+      padding: ${theme.spacings.medium} ${theme.spacings.medium}
+        ${theme.grid.gutterBottom};
+
+      div {
+        h2 {
+          line-height: 1;
+        }
+      }
+    }
+
+    @media (max-width: 992px) {
+      grid-template-columns: 1fr;
     }
   `}
 `
@@ -42,6 +57,10 @@ export const Content = styled.div`
     margin-top: ${theme.spacings.large};
 
     width: 80%;
+
+    @media (max-width: 992px) {
+      width: 100%;
+    }
   `}
 `
 
@@ -70,6 +89,20 @@ export const Item = styled.div`
     p {
       font-size: ${theme.sizes.medium};
       color: ${theme.base.text};
+    }
+
+    @media (max-width: 992px) {
+      flex-direction: column;
+    }
+  `}
+`
+
+export const Image = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+
+    img {
+      width: 100%;
     }
   `}
 `

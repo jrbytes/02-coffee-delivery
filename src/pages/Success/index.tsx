@@ -64,9 +64,9 @@ export function Success() {
           </S.Item>
         </S.Content>
       </div>
-      <div>
+      <S.Image>
         <img src={sendingOrder} alt="Desenho de homem levando o pedido" />
-      </div>
+      </S.Image>
     </S.Container>
   )
 }
