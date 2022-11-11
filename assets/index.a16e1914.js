@@ -657,7 +657,7 @@ Error generating stack: `+o.message+`
     display: flex;
     flex-wrap: wrap;
 
-    gap: ${e.spacings.xlarge};
+    gap: ${e.spacings.large};
     margin-bottom: ${e.grid.gutterBottom};
 
     @media (max-width: ${e.grid.container}) {
