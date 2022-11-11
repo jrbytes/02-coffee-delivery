@@ -25,7 +25,7 @@ export const Content = styled.div`
     display: flex;
     flex-wrap: wrap;
 
-    gap: ${theme.spacings.xlarge};
+    gap: ${theme.spacings.large};
     margin-bottom: ${theme.grid.gutterBottom};
 
     @media (max-width: ${theme.grid.container}) {
